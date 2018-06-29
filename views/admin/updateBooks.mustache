@@ -1,0 +1,76 @@
+<html>
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="/styles.css">
+
+        
+</head>
+<body>
+    <div class="container">
+                <div class = "col-xs-12" >
+                    <h4>Update Book</h4><br/>
+
+                            {{#bookdata}}
+                            
+                        <form class="form-group" action ="/admin/updatebook" method="post">
+                            <div class="form-group mx-sm-3 mb-2">
+                                {{! <label for="availability" class="sr-only">Availability</label> }}
+
+                                <select name="categoryName">
+                                        <option value="0">Select Category Name</option>
+                                            {{#categories}}
+                                         <option value="{{id}}" selected={{id}}>{{categoryname}}</option>
+                                            {{/categories}}
+                                </select>
+                            </div>
+                            
+                            <div class="form-group mx-sm-3 mb-2">
+                                <label for="title" class="sr-only">Book Title</label>
+                                <input type="text" class="form-control" name="title" id="bookTitle" value="{{title}}"placeholder="Title">
+                            </div>
+                            <div class="form-group mx-sm-3 mb-2">
+                                <label for="author" class="sr-only">Author</label>
+                                <input type="text" class="form-control" id="author" name="author" value="{{author}}" placeholder="Author">
+                            </div>
+                            <div class="form-group mx-sm-3 mb-2">
+                                <label for="isbn" class="sr-only">Isbn</label>
+                                <input type="text" class="form-control" id="isbn" name="isbn"  value="{{isbn}}" placeholder="ISBN">
+                            </div>
+                            <div class="form-group mx-sm-3 mb-2">
+
+                                    <select name="availability">
+                                         <option value="0">Availability</option>
+
+                                        <option>True</option>
+                                        <option>False</option> 
+                                    </select>
+                            </div>
+                            <div class="form-group mx-sm-3 mb-2">
+                                <label for="imageurl" class="sr-only">Image Url</label>
+                                <input type="text" class="form-control"  name="imageurl"  value="{{imageurl}}" placeholder="Image Url"> 
+                                 
+                            </div>
+                            <div class="form-group mx-sm-3 mb-2">
+                                <label for="description" class="sr-only">Description</label>
+                                <input type="text" class="form-control" name="description" value="{{description}}" placeholder="Description"> 
+                                 
+                            </div><br>
+
+                           
+
+                            <input type="hidden" name="bookId" value="{{id}}" />
+                            <button type ="submit" class="btn btn-primary mb-2" id = "btnSubmit">Update Book</button>
+                            
+                             {{/bookdata}}                     
+                        </form>
+                </div>
+            </div>
+    </body>
+</html>

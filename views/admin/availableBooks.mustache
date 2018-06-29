@@ -1,0 +1,68 @@
+<html>
+    <head>
+       <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+    </head>
+    <body>
+    <div class="container">
+        {{! <div>
+        
+            <a href="/admin/addbooks"><button  type="submit" class="btn btn-primary mb-2" id="btnSubmit">Add Books</button></a>
+
+
+        
+            <form action="/admin/searchbook" method="post">
+
+                {{! <div class="form-group mx-sm-3 mb-2"> }}
+                    {{! <label for="title" class="sr-only"Search Book</label> }}
+                    {{! <input type="text" class="form-control" name="searchText"  placeholder="Enter book Title to search"> }}
+                    {{! <input type="submit" id="btnSubmit" name="btnSearch" value="Search Books"/> }}
+                {{! </div>   }}
+            {{! </form>
+        
+        </div>  }}
+
+        <div class="row">
+                <div class="col-xs-8"  >
+
+                    <h4>All Books</h4><br/>
+                    <table class="table table-bordered table-hover">
+                        
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Isbn</th>
+                        <th>Availability</th>
+                        <th>imageurl</th>
+                        <th>Description</th>
+                        <th>Borrow Book</th>
+                        
+                        {{#books}}
+                        <tr>
+                            
+                            <td>{{title}}</td>
+                            <td>{{author}}</td>
+                            <td>{{isbn}}</td>
+                            <td>{{availability}}</td>
+                            <td> <img src='{{imageurl}}'  width="100" height="100"/></td>
+                            <td>{{description}}</td>
+                            <td>
+                                {{! <form action= method='post'> }}
+                                    <input type="hidden" name="bookId" value='{{id}}' /> 
+                                    <a href='/checkoutbook/{{id}}'><input type="submit" value="check out" class ="btn btn-primary mb-2"id="btnSubmit"/></a>
+                            </form></td>                        
+                            </tr>
+                        {{/books}}
+
+                    </table>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>
