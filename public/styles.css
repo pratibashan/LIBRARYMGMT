@@ -1,0 +1,180 @@
+#homeBody {
+    height:100%;
+    background-image: url(LB.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.signUp{
+    color: whitesmoke;
+    padding-left: 25px
+}
+
+#loginBody {
+    height: 100%;
+    background-image: url(https://opelousaseunicepubliclibrarydotorg.files.wordpress.com/2015/01/book-background.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#registerBody {
+    background-image: url(https://c.wallhere.com/photos/7d/e1/thomas_leuthard_street_photography_leica_olympus_fuji_flickr-1023783.jpg!d);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.container {
+    background-color: #37474F;
+    opacity: 0.97;
+    padding-top: 15px
+}
+
+#bookPageBodyBackground{
+    background-color: #37474F !important;
+    
+}
+
+#tableGrid{
+    background-color:#FFFFE0	
+}
+
+
+.footer {
+    position: relative;
+    margin-top: -150px; /* negative value of footer height */
+    height: 150px;
+    clear:both;
+    padding-top:20px;
+  } 
+
+.intro {
+    font-weight: 100;
+    color: azure;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    
+}
+
+.register {
+    padding: 15px;
+    color: whitesmoke
+}
+
+#loginWrapper{
+    max-width: 550px;
+}
+
+#registerWrapper {
+max-width: 550px;
+}
+
+.truFacts{
+    color: azure;
+    padding-left: 20px;
+    padding-bottom: 25px;
+    padding-top: 45px;
+}
+
+.login{
+    padding:15px;
+    color: whitesmoke
+}
+
+.md-form{
+    color: whitesmoke
+}
+
+.page-footer{
+    margin-bottom: 0%
+}
+
+
+/* @media only screen and (max-width: 800px) {
+ 
+    #no-more-tables table,
+    #no-more-tables thead,
+    #no-more-tables tbody,
+    #no-more-tables th,
+    #no-more-tables td,
+    #no-more-tables tr {
+    display: block;
+    }
+     
+   
+    #no-more-tables thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+    }
+     
+    #no-more-tables tr { border: 1px solid #ccc; }
+      
+    #no-more-tables td {
+   
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+    white-space: normal;
+    text-align:left;
+    }
+     
+    #no-more-tables td:before {
+   
+    position: absolute;
+   
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align:left;
+    font-weight: bold;
+    }
+     
+    
+    #no-more-tables td:before { content: attr(data-title); }
+    } */
+
+    #adminviewbooksnavbar{
+        /* background-color: #344346; */
+        background-color:#37474F;
+    }
+    .nav-brand {
+        color:whitesmoke;
+    }
+     .nav-link{
+        color:whitesmoke;
+    }
+    .col-auto {
+        float:right;
+    }
+    #booksDiv {
+        background-color:transparent;
+    }
+    #addButtonDiv{
+        margin-top: 10px;
+    }
+    #searchFormDiv{
+        background-color: none;
+        align-items: center;
+        padding-bottom: 5px;
+    }
+    
+#table {
+    background-color:transparent;
+}   
+#booksTable {
+    border: 1px solid;
+    padding: 10px;
+    box-shadow: 5px 10px 8px #888888;
+} 
+
+/* #navDiv{
+    height:100%;
+} */
+.btn-secondary{
+    background-color:#37474F; 
+}

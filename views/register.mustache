@@ -1,18 +1,135 @@
-
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        {{! <link rel="stylesheet" type="text/css" href="site.css"> }}
-    </head>
-    <body>
-    <div>
-        <h3>Sign Up</h3>
-        <form action="/userregister" method="post">
-            <p><label>User Name:<input type="text" name="userName"/></label><br/><br/></p>
-            <p><label>Password:<input type="text" name="password"/></label><br/><br/></p>
-            <p><input type="submit" name="btnSignUp" value="Sign Up"/></p>
-        </form>
-        </div>
-    </body>
+<head>
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+	<title>LIBRARYMGMT - Sign Up</title>
+	<link href="styles.css" rel="stylesheet" type="text/css">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.4/css/mdb.min.css" rel="stylesheet">
+</head>
+<body id="registerBody">
+	<nav class="navbar navbar-expand-lg navbar-dark special-color">
+		<a class="navbar-brand" href="#">LIBRARYMGMT</a> <button aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#basicExampleNav" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>
+		<div class="collapse navbar-collapse" id="basicExampleNav">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="/#">Home <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/availablebooks">Books</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">About Us</a>
+				</li>
+				<li class="nav-item dropdown">
+					<a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink">Users</a>
+					<div aria-labelledby="navbarDropdownMenuLink" class="dropdown-menu dropdown-primary">
+						<a class="dropdown-item" href="/login">Login</a> <a class="dropdown-item" href="/register">Sign Up</a>
+					</div>
+				</li>
+			</ul>
+			{{! <form class="form-inline">
+				<div class="md-form my-0">
+					<input aria-label="Search" class="form-control mr-sm-2" placeholder="Search" type="text">
+				</div>
+			</form> }}
+		</div>
+	</nav><br>
+	<br>
+	<br>
+	<br>
+
+	{{! ---------------original form that works------------------
+	<div>
+		<h3>Sign Up</h3>
+		<form action="/userregister" method="post">
+			<p><label>User Name:<input name="userName" type="text"></label><br>
+			<br></p>
+			<p><label>Password:<input name="password" type="text"></label><br>
+			<br></p>
+			<p><label>User Name:<input name="userName" type="text"></label><br>
+			<br></p>
+			<p><input name="btnSignUp" type="submit" value="Sign Up"></p>
+		</form>
+	</div>}}
+
+	<div class="container" id="registerWrapper">
+		<form action="/userregister" class="register" method="post">
+			<p class="h4 text-center">Sign up</p>
+			<div class="md-form">
+				<input class="form-control text-light" id="inputYourUsername" name="userName" type="text"> <label for="inputYourUsername">Your Username</label>
+			</div>
+			<div class="md-form">
+				<input class="form-control text-light" id="inputYourPassword" name="password" type="password"> <label for="inputYourPassword">Your Password</label>
+			</div>
+			<div class="md-form">
+				<input class="form-control text-light" id="inputYourFirstName" name="firstName" type="text"> <label for="inputYourFirstName">Your First Name</label>
+			</div>
+			<div class="md-form">
+				<input class="form-control text-light" id="inputYourLastName" name="lastName" type="text"> <label for="inputYourLastName">Your Last Name</label>
+			</div>
+			<div class="md-form">
+				<input class="form-control text-light" id="inputYourEmail" name="emailAddress" type="email"> <label for="inputYourEmail">Your email</label>
+			</div>
+			<div class="md-form">
+				<input class="form-control text-light" id="inputYourPhoneNumber" name="phoneNumber" type="text"> <label for="inputYourPhoneNumber">Your Phone Number</label>
+			</div>
+			<div class="text-center mt-4">
+				<button class="btn btn-red darken-4" type="submit">Register</button>
+			</div>
+		</form>
+		<div class="truFacts">
+			<h2>Did you know?</h2>
+			<p>Readers make good citizens! The NEA survey notes that readers are more likely to do volunteer work.</p>
+		</div>
+	</div><br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<footer class="page-footer font-small special-color pt-4 mt-4">
+		<div class="container-fluid text-center text-md-left">
+			<div class="row">
+				<div class="col-md-6 mt-md-0 mt-3">
+					<h5 class="text-uppercase">LIBRARYMGMT</h5>
+					<p>It's just like the Header, but its a footer and at the bottom.</p>
+				</div>
+				<hr class="clearfix w-100 d-md-none pb-3">
+				<div class="col-md-6 mb-md-0 mb-3">
+					<h5 class="text-uppercase">Directory</h5>
+					<ul class="list-unstyled">
+						<li>
+							<a href="/#">Home</a>
+						</li>
+						<li>
+							<a href="/availablebooks">Books</a>
+						</li>
+						<li>
+							<a href="/AboutUs">About Us</a>
+						</li>
+						<li>
+							<a href="/login">Login</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="footer-copyright text-center py-3">
+			© 2018 Copyright: <a href="/home">LIBRARYMGMT.com</a>
+		</div>
+	</footer>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript">
+	</script> 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js" type="text/javascript">
+	</script> 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js" type="text/javascript">
+	</script> 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.4/js/mdb.min.js" type="text/javascript">
+	</script> 
+</body>
 </html>

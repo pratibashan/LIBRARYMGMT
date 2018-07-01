@@ -1,0 +1,90 @@
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+	<title>LIBRARYMGMT - Home</title>
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.4/css/mdb.min.css" rel="stylesheet">
+	<link href="/styles.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark special-color">
+		<a class="navbar-brand" href="#">LIBRARYMGMT</a> <button aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#basicExampleNav" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>
+		<div class="collapse navbar-collapse" id="basicExampleNav">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="/#">Home <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/availablebooks">Books</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">About Us</a>
+				</li>
+				<li class="nav-item dropdown">
+					<a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink">Users</a>
+					<div aria-labelledby="navbarDropdownMenuLink" class="dropdown-menu dropdown-primary">
+						<a class="dropdown-item" href="/login">Login</a> <a class="dropdown-item" href="/register">Sign Up</a><a class="dropdown-item" href="/logout">Log Out</a>
+					</div>
+				</li>
+                
+			</ul>
+			
+		</div>
+	</nav><br>
+	<br>
+        <div class="container" id="booksDiv">
+            {{! <form action='/mybooks' method='post'> }}
+
+                <p>Hello,&nbsp<b>{{username}}</b> &nbspyour checked out book details</p>
+                {{! <div class="table-responsive"> }}
+                 <table class="table table-bordered box-shadow--6dp">
+                    <thead>
+                    <tr>
+                        <th scope="col">Title</th>
+                        <th scope="col">Author</th>
+                        <th scope="col">ISBN</th>
+                        <th scope="col">Checkout date</th>
+                        <th scope="col">Check In</th>
+
+                    </tr>
+                    </thead>
+                    {{#books}}
+                    <tbody>
+                     <tr>
+                        <td>{{title}}</td>
+                        <td>{{author}}</td>
+                        <td>{{isbn}}</td>
+                        <td>{{checkoutdate}}</td>
+                        <td>
+                        
+                        <form action='/mybooks' method='post'>	 
+                            <input name="bookId" type="hidden" value='{{id}}'/>   
+                            <input class="btn btn-secondary mb-2" id="btnSubmit" type="submit" value="check In"/>
+						</form>
+                        </td>
+                    </tr>
+                    </tbody>
+                    {{/books}}
+                </table>   
+                {{! </div> }}
+                {{! </form> }}
+    </div>
+</body>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript">
+	</script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js" type="text/javascript">
+	</script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js" type="text/javascript">
+	</script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.4/js/mdb.min.js" type="text/javascript">
+	</script>
+
+</html>
+
+
+
+{{! <a href="/mybooks/{{id}}"> }}

@@ -19,15 +19,20 @@ function userRegister(req,res,next){
 
     let userName = req.body.userName  
     let password = req.body.password
+    let firstName = req.body.firstName
+    let lastName = req.body.lastName
+    let emailAddress = req.body.emailAddress
+    let phoneNumber = req.body.phoneNumber
+    
 
 
-    db.none('INSERT INTO users(username,password)' +
-            'VALUES($1,$2)',[userName,password])
+    db.none('INSERT INTO users(username,password,firstname,lastname,email,phone)' +
+            'VALUES($1,$2,$3,$4,$5,$6)',[userName,password,firstName,lastName,emailAddress,phoneNumber])
             .then(function(){
                 res.redirect('/userregister')
             }).catch(function (err) {  
                 return next(err)
-              })
+            })
 }
 
 // function userValidate(completion){
@@ -47,8 +52,8 @@ function userValidate(req,res,next){
 
     let loginName = req.body.loginName.toLowerCase()
     let loginPassword = req.body.loginPassword.toLowerCase()
-
-    console.log(req.session.userId)
+    
+    //console.log(req.session.userId)
     
     db.one('SELECT id,username,password FROM users where username = $1 and password = $2',[loginName,loginPassword])
         .then(function(user){
@@ -58,49 +63,70 @@ function userValidate(req,res,next){
 
         if(user){
             req.session.username = user.username
+
+            req.session.userId = user.id
+            var hour = 3600000
+            req.session.cookie.expires = new Date(Date.now() + hour)
+            req.session.cookie.maxAge = hour
+
             if(req.session.username == 'admin'){
                 route = '/admin/viewbooks'
                 res.redirect(route) 
                 return 
-                
-            }
-            else {
-                req.session.userId = user.id
-
+            } else {
                 if(req.session.currentBookId) {
-
-                    db.none("INSERT into userbooks(userid,bookid) VALUES($1,$2)",[req.session.userId,req.session.currentBookId])
-                    .then(function(){
-
-                        db.none("UPDATE books SET availability ='False' WHERE id =$1",[req.session.currentBookId]) 
-                        .then(function(){
-
-                            route = '/mybooks'   
-                            res.redirect(route)                      
-                            req.session.currentBookId = null 
-                            return 
-
-                        }).catch(function(err){      
-                            return next(err)
-                        }) 
-                
-                     }).catch(function(err){      
-                        return next(err)
-                     })   
-              
+                    checkout(req,res,next)
+                    return 
                 } else {
-                    route = '/availablebooks'   
-                    res.redirect(route) 
-                    return    
+                    res.redirect("/availablebooks")
+                    return 
                 }
-            }    
+            } 
+        } 
+        else {
+            route = '/login'   
+                res.redirect(route) 
+                return    
+            }
+    }).catch(function(err){      
+        res.redirect('/') 
+        })
+    }   
+            // else {
+
+                
+            //     if(req.session.currentBookId) {
+
+            //         db.none("INSERT into userbooks(userid,bookid) VALUES($1,$2)",[req.session.userId,req.session.currentBookId])
+            //         .then(function(){
+
+            //             db.none("UPDATE books SET availability ='False' WHERE id =$1",[req.session.currentBookId]) 
+            //             .then(function(){
+
+            //                 route = '/mybooks'   
+            //                 res.redirect(route)                      
+            //                 req.session.currentBookId = null 
+            //                 return 
+
+            //             }).catch(function(err){      
+            //                 return next(err)
+            //             }) 
+                
+            //          }).catch(function(err){      
+            //             return next(err)
+            //          })   
+              
+               // }
+            //    else {
+            //     route = '/login'   
+            //     res.redirect(route) 
+            //     return    
+            // }
+            //}    
 
         //res.redirect(route) 
-        }        
-    }).catch(function(err){
-        res.redirect('/')
-     })
-}
+        //}        
+    
 
 function getAllBooks(completion) {
 
@@ -191,7 +217,10 @@ function getBookById(req, res, next) {
        
         //console.log(data)
         //console.log(categoriesArray)
-        res.render('admin/updateBooks',{bookdata : data,categories :categoriesArray})
+        res.render('admin/updateBooks',{bookdata : data,categories :categoriesArray})        
+        //res.render('admin/adminViewBooks',{bookdata : data,categories :categoriesArray})
+
+
 
     }).catch(function(err) {
       return next(err)
@@ -200,7 +229,7 @@ function getBookById(req, res, next) {
 
 function updateBook(req,res,next){
     let bookId = parseInt(req.body.bookId)
-    console.log("book id:"+ bookId)
+    //console.log("book id:"+ bookId)
     
     db.none('UPDATE books SET title=$1, author=$2, isbn=$3, availability=$4,imageurl=$5,description=$6,categoryid=$7 WHERE id=$8',
       [req.body.title, req.body.author, req.body.isbn, req.body.availability,req.body.imageurl,req.body.description,req.body.categoryName,
@@ -214,7 +243,7 @@ function updateBook(req,res,next){
 } 
 
 function deleteBook(req, res, next) {
-    var bookId =req.body.bookId
+    var bookId =parseInt(req.body.bookId)
     console.log(bookId)
 
     db.none('DELETE from userbooks WHERE bookid = $1',[bookId])
@@ -231,6 +260,9 @@ function deleteBook(req, res, next) {
 } 
   
 function searchBook(req, res, next) {
+    let id = parseInt(req.params.id)
+    console.log(id)
+    let bookId = parseInt(req.body.bookId)
     let searchText = req.body.searchText
 
     let booksArray = [] 
@@ -265,25 +297,59 @@ function getAvailableBooks(req,res,next){
     })    
 }
 
+function checkout(req,res,next) {
+    
+    let bookId = parseInt(req.body.bookId)
+    req.session.currentBookId = bookId 
+    if(req.session.userId) {
+    
+        //if(req.session.currentBookId) {
+
+            db.none("INSERT into userbooks(userid,bookid) VALUES($1,$2)",[req.session.userId,req.session.currentBookId])
+            .then(function(){
+
+                db.none("UPDATE books SET availability ='False' WHERE id =$1",[req.session.currentBookId]) 
+                .then(function(){
+
+                route = '/mybooks'   
+                res.redirect(route)                      
+                req.session.currentBookId = null 
+                return 
+
+                }).catch(function(err){      
+                return next(err)
+                })
+            }).catch(function(err){      
+                return next(err) 
+            })
+        }
+    else {
+        route ='/login' 
+        res.redirect(route)
+        }
+    
+}
+
+
 function myBooks(req,res,next) {
 
     let booksArray = [] 
-    console.log(req.session.username)
+    //console.log(req.session.username)
      if(req.session.userId) {
 
         db.any('select bookid from userbooks where userid = $1',[req.session.userId]) 
         .then(function (bookId) {
     
-            console.log(bookId)
+            //console.log(bookId)
             
-            db.any('SELECT title, author, isbn from books JOIN userbooks on books.id = userbooks.bookid WHERE userbooks.userid = $1',[req.session.userId])
+            db.any('SELECT books.id,title, author, isbn,checkoutdate from books JOIN userbooks on books.id = userbooks.bookid WHERE userbooks.userid = $1',[req.session.userId])
             .then(function (books) {
 
                 books.forEach(function(book){
                     booksArray.push(book)
-                    console.log(booksArray)
+                    //console.log(booksArray)
                 })
-                res.render('admin/userBooks',{books : booksArray, username : req.session.username})
+                res.render('admin/myBooks',{books : booksArray, username : req.session.username})
 
             }).catch(function(err) {
             return next(err) 
@@ -293,7 +359,29 @@ function myBooks(req,res,next) {
         })  
     }       
 
+}
 
+function checkin(req,res,next) {
+    
+    let bookId = parseInt(req.body.bookId)
+    console.log(bookId)
+    db.none('DELETE from userbooks WHERE bookid = $1',[bookId])
+      .then(function () {
+        db.none("UPDATE books SET availability ='True' WHERE id =$1",[bookId]) 
+        .then(function(){
+                res.redirect('/mybooks')
+        }).catch(function (err) {
+                return next(err)
+            })
+    }).catch(function (err) {
+        return next(err)
+        })
+ 
+}
+function logout(req,res,next){
+    req.session.destroy()
+    
+    res.redirect('/login')
 }
 
 
@@ -308,6 +396,9 @@ module.exports = {
     deleteBook : deleteBook,
     searchBook : searchBook,
     getAvailableBooks : getAvailableBooks,
-    myBooks : myBooks
+    myBooks : myBooks,
+    checkout : checkout,
+    checkin : checkin,
+    logout : logout
  }
 
