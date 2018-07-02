@@ -144,21 +144,7 @@ function getAllBooks(completion) {
 
 }
 
-// function getAllBooks(req,res,next){
-   
-//     let booksArray = [] 
 
-//     db.any('select id,title,author,isbn,availability,imageurl,description from books')
-//     .then(function (data) {
-//         data.forEach(function(book){
-//             booksArray.push(book)           
-//         })
-//         res.render('admin/adminViewBooks',{books : booksArray})
-
-//     }).catch(function(err) {
-//       return next(err)
-//     })
-// }
 
 
 function getCategories(req,res,next){
@@ -177,6 +163,23 @@ function getCategories(req,res,next){
     })
 
 }
+
+// function getCategories(req,res,next){
+
+//         let categoriesArray = []
+    
+//         db.any('select id,categoryname from categories')
+//         .then(function (data) {
+//             data.forEach(function(category){
+//                 categoriesArray.push(category)           
+//             })
+//             res.render('admin/updateBooks',{categories :categoriesArray})
+    
+//         }).catch(function(err) {
+//           return next(err)
+//         })
+    
+//     }
 
 function addBook(req, res, next) {
     let categoryId = req.body.categoryName
@@ -342,7 +345,7 @@ function myBooks(req,res,next) {
     
             //console.log(bookId)
             
-            db.any('SELECT books.id,title, author, isbn,checkoutdate from books JOIN userbooks on books.id = userbooks.bookid WHERE userbooks.userid = $1',[req.session.userId])
+            db.any('SELECT books.id,title, author, imageurl,isbn,checkoutdate from books JOIN userbooks on books.id = userbooks.bookid WHERE userbooks.userid = $1',[req.session.userId])
             .then(function (books) {
 
                 books.forEach(function(book){

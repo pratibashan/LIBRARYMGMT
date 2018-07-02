@@ -13,7 +13,7 @@
 #loginBody {
     height: 100%;
     background-image: url(https://opelousaseunicepubliclibrarydotorg.files.wordpress.com/2015/01/book-background.jpg);
-    background-size: cover;
+    background-size: auto;
     background-repeat: no-repeat;
 }
 
@@ -87,7 +87,12 @@ max-width: 550px;
 }
 
 .page-footer{
-    margin-bottom: 0%
+    
+        top: 50px;
+        position: relative;
+        height: auto;
+        width: 100%;
+   
 }
 
 
@@ -155,7 +160,7 @@ max-width: 550px;
         background-color:transparent;
     }
     #addButtonDiv{
-        margin-top: 10px;
+        margin-top: 5px;
     }
     #searchFormDiv{
         background-color: none;
@@ -166,15 +171,15 @@ max-width: 550px;
 #table {
     background-color:transparent;
 }   
-#booksTable {
+/* #booksTable {
     border: 1px solid;
     padding: 10px;
     box-shadow: 5px 10px 8px #888888;
-} 
+}  */
 
 /* #navDiv{
     height:100%;
 } */
-.btn-secondary{
+/* .btn-secondary{
     background-color:#37474F; 
-}
+} */

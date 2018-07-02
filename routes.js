@@ -62,8 +62,8 @@ router.post('/mybooks',db.checkin)
 
 //router.get('/mybooks/:id',db.checkin)
 
-    
-//router.get('/admin/searchbook/:id',db.getBookById)
+// router.get('/admin/searchbook',db.getCategories)    
+// router.get('/admin/searchbook/:id',db.getBookById)
 
 
 

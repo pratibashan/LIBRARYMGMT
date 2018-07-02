@@ -4,11 +4,12 @@
 	<meta charset="utf-8">
 	<meta content="IE=edge" http-equiv="X-UA-Compatible">
 	<meta content="width=device-width, initial-scale=1" name="viewport">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript">  </script> 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script> 
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>  
+  {{! <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript">  </script>  }}
+  {{! <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>  }}
+	{{! <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>   }}
 
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.4/css/mdb.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="/styles.css" rel="stylesheet" type="text/css">
 
@@ -23,15 +24,15 @@
 
   <div class="collapse navbar-collapse"id="basicExampleNav">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/#">Home <span class="sr-only">(current)</span></a>
+      <li class="nav-item ">
+        <a class="nav-link" href="/#">Home </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/admin/viewbooks">All Books</a>
+      <li class="nav-item active">
+        <a class="nav-link" href="/admin/viewbooks">All Books<span class="sr-only">(current)</span></a>
       </li>
       
     <span class="navbar-item">
-        <a class="nav-link" href="/logout">Log Out</a>
+        <a class="nav-link" href="/logout">SIGN OUT</a>
     </span>
     </ul>
   </div>
@@ -41,30 +42,35 @@
 <div class="container" id="booksDiv">
 <form  action="/admin/searchbook" method="post" >
   <div class="form-row" id="searchFormDiv">
-     <div class="form-group col-md-7">
+     <div class="form-group col-md-5">
     
 
       <input type="text" class="form-control form-control-lg" name ="searchText" placeholder="Enter a title to search">
     </div>
      <div class="form-group col-md-1">
      <input name="bookId" type="hidden" value='{{id}}'> 
-        <button type="submit" class="btn btn-danger" name="btnSearch"><i class="fa fa-search"></i></button>
+    <button type="submit" class="btn btn-danger" name="btnSearch"><i class="fa fa-search"></i></button>
     </div> 
-    <div class="form-group col-md-4" id ="addButtonDiv">
-      <a href='/admin/addbooks' class="btn  btn-secondary mb-2" role ="button">Add books</a>
-    </div> 
+		
+    {{! <div class="form-group col-md-6" id ="addButtonDiv"> }}
+     
+    {{! </div>  }}
   </div> 
   </form>
+	 <a href='/admin/addbooks' class="btn  btn-default" role ="button">Add books</a>
 </div> 
 <br/><br/><br/>
-<div class="container" id= "table">
-<table class="table table-borderless table-hover">
+<div class="container" id="booksDiv">
+<div class="row">
+
+    <div class="col-xs-8">
+<table class="table table-responsive table-bordered table-hover">
 						<thead class="thead-light">
 							<tr>
+								<th scope="col">Image</th>
+								<th scope="col">ISBN</th>
 								<th scope="col">Title</th>
 								<th scope="col">Author</th>
-                <th scope="col">Image</th>
-								<th scope="col">ISBN</th>
 								<th scope="col">Availability</th>
 								{{! <th>Description</th>  }}
 								<th scope="col">Update</th>
@@ -74,21 +80,21 @@
 						<tbody>
 							
                                 {{#books}}
-                <tr id="booksTable"> 
+                <tr id="booksTable">
+								<td ><img height="100" src='{{imageurl}}' width="100" data-toggle="tooltip" data-placement="bottom" title="{{description}}"></td>
+ 								<td >{{isbn}}</td>
 								<td scope="row">{{title}}</td>
 								<td >{{author}}</td>
-                <td ><img height="100" src='{{imageurl}}' width="100" data-toggle="tooltip" data-placement="bottom" title="{{description}}"></td>
-								<td >{{isbn}}</td>
 								<td >{{availability}}</td>
 								 {{! <td data-title="description">{{description</td> }}
 								<td >
-									<a href="/admin/addbooks/{{id}}"><button class="btn text-light btn-secondary mb-2" id="btnSubmit" type="submit">Update</button></a> 
+									<a href="/admin/addbooks/{{id}}"><button class="btn btn-default mb-2" id="btnSubmit" type="submit">Update</button></a> 
 								</td>
 								<td>
 									<form action='/admin/deletebook' method='post'>
 										<input name="bookId" type="hidden" value='{{id}}'> 
                     <input name="categoryId" type="hidden" value='{{categoryid}}'> 
-                    <button type="submit" class="btn btn-danger" name="btnDelete"><i class="fa fa-trash-o" style="font-size:24px;"></i></button>
+                    <button type="submit" class="btn btn-danger" name="btnDelete"><i class="fa fa-trash-o" ></i></button>
 
 									</form>
 								</td>
@@ -96,6 +102,9 @@
 																{{/books}}
 						</tbody>
 		</table>
+		</div>
+		</div>
+		</div>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript">
@@ -109,4 +118,3 @@
 </body>
 </html> 
 
-{{! <a href="/admin/addbooks/{{id}}"> }}
